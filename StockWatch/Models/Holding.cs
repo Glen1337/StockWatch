@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace StockWatch.Models
 {
-    public class Trade
+    public class Holding
     {
         // ID
-        public long TradeId { get; set; }
+        public long HoldingId { get; set; }
 
         // Cost per share
-        public decimal Price { get; set; }
+        public decimal CostBasis { get; set; }
         
         // Quantity bought/sold
         public decimal Quantity { get; set; }
 
         // Ticker
+        //[Required]
+        //[StringLength(8, ErrorMessage = "Symbol is limited to 8 characters")]
         public string Symbol { get; set; }
 
         // Date/Time when transaction occured

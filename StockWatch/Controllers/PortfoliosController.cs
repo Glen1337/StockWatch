@@ -38,6 +38,7 @@ namespace StockWatch.Controllers
             //var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             //var userId = claim.Value;
             var ports = _context.Portfolios;
+            //ports.First().
             return await _context.Portfolios.ToListAsync();
 
         }

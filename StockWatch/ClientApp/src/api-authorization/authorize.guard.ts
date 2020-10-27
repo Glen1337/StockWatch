@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthorizeService } from './authorize.service';
 import { tap } from 'rxjs/operators';
 import { ApplicationPaths, QueryParameterNames } from './api-authorization.constants';
-
+//A route guard AuthorizeGuard that can be added to routes and requires a user to be authenticated before visiting the route.
 @Injectable({
   providedIn: 'root'
 })

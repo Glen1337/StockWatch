@@ -9,7 +9,8 @@ namespace StockWatch.Models
     public class ApplicationUser : IdentityUser
     {
        // Properties are inherited (but hidden) from IdentityUser
-       public List<Portfolio> Portfolios { get; set; }
-       
+       //public List<Portfolio> Portfolios { get; set; }
+       public ICollection<Portfolio>Portfolios { get; set; }
+
     }
 }

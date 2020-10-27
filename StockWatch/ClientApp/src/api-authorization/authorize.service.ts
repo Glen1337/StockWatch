@@ -37,6 +37,7 @@ export interface IUser {
   providedIn: 'root'
 })
 export class AuthorizeService {
+ // A service AuthorizeService that handles the lower-level details of the authentication process and exposes information about the authenticated user to the rest of the app for consumption.
   // By default pop ups are disabled because they don't work properly on Edge.
   // If you want to enable pop up authentication simply set this flag to false.
 

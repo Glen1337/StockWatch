@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IdentityModel.Tokens.Jwt;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
 // Project Started: 10/24/2020
 namespace StockWatch
@@ -41,12 +43,40 @@ namespace StockWatch
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+
             services.AddControllersWithViews();
+
             services.AddRazorPages();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
+            });
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+            });
+
+            services.Configure<JwtBearerOptions>(IdentityServerJwtConstants.IdentityServerJwtBearerScheme, options =>
+            {
+                    //
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                //options.Cookie.HttpOnly = true;
+                //options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                //options.LoginPath = "/Identity/Account/Login";
+                //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                //options.SlidingExpiration = true;
             });
             //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
         }
@@ -74,6 +104,7 @@ namespace StockWatch
 
             if (!env.IsDevelopment())
             {
+                // ?
                 app.UseSpaStaticFiles();
             }
 
@@ -84,6 +115,7 @@ namespace StockWatch
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                // ?
                 endpoints.MapControllers();
             });
 

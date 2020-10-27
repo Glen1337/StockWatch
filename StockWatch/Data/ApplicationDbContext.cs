@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace StockWatch.Data
 {
@@ -26,23 +27,24 @@ namespace StockWatch.Data
 
             // Portfolio - Seeds
             modelBuilder.Entity<Portfolio>().HasData(new Portfolio { UserId = "53ab1a2c-b170-4232-9958-a1266114803c", PortfolioId = 1, Title = "Glen's Portfolio 1"});
-            modelBuilder.Entity<Portfolio>().HasData(new Portfolio { UserId = "9722240c-3e76-4150-b241-70770531c119", PortfolioId = 2, Title = "Glen's Portfolio 1" });
+            modelBuilder.Entity<Portfolio>().HasData(new Portfolio { UserId = "9722240c-3e76-4150-b241-70770531c119", PortfolioId = 2, Title = "NOT Glen's portfolio" });
 
 
-            // Trades - Required
-            modelBuilder.Entity<Trade>().Property(t => t.TradeId).IsRequired();
-            modelBuilder.Entity<Trade>().Property(t => t.Price).IsRequired();
-            modelBuilder.Entity<Trade>().Property(t => t.Quantity).IsRequired();
-            modelBuilder.Entity<Trade>().Property(t => t.Symbol).IsRequired();
+            // Holdings - Required Fields
+            //modelBuilder.Entity<Holding>().Property(t => t.HoldingId).IsRequired();
+            //modelBuilder.Entity<Holding>().Property(t => t.CostBasis).IsRequired();
+            //modelBuilder.Entity<Holding>().Property(t => t.Quantity).IsRequired();
+            //modelBuilder.Entity<Holding>().Property(t => t.Symbol).IsRequired();
 
-            // Trades - Seeds
-            modelBuilder.Entity<Trade>().HasData(new Trade { PortfolioId = 1, TradeId = 1, Price = 67.24m, Quantity = 12m, Symbol = "FSLR", Action = "Sell", Type = "Stock" });
-            modelBuilder.Entity<Trade>().HasData(new Trade { PortfolioId = 1, TradeId = 2, Price = 27.67m, Quantity = 612m, Symbol = "SNAP", Action = "Buy", Type = "Stock" });
-            modelBuilder.Entity<Trade>().HasData(new Trade { PortfolioId = 2, TradeId = 3, Price = 1027.38m, Quantity = 2m, Symbol = "CMG", Action = "Buy", Type = "Stock" });
-            modelBuilder.Entity<Trade>().HasData(new Trade { PortfolioId = 2, TradeId = 4, Price = 77.03m, Quantity = 2m, Symbol = "AMD", Action = "Sell", Type = "Stock" });
+            // Holdings - Seeds
+            modelBuilder.Entity<Holding>().HasData(new Holding { PortfolioId = 1, HoldingId = 1, CostBasis = 67.24m, Quantity = 12m, Symbol = "FSLR", Action = "Sell", Type = "Stock" });
+            modelBuilder.Entity<Holding>().HasData(new Holding { PortfolioId = 1, HoldingId = 2, CostBasis = 27.67m, Quantity = 612m, Symbol = "SNAP", Action = "Buy", Type = "Stock" });
+            modelBuilder.Entity<Holding>().HasData(new Holding { PortfolioId = 2, HoldingId = 3, CostBasis = 1027.38m, Quantity = 2m, Symbol = "CMG", Action = "Buy", Type = "Stock" });
+            modelBuilder.Entity<Holding>().HasData(new Holding { PortfolioId = 2, HoldingId = 4, CostBasis = 77.03m, Quantity = 2m, Symbol = "AMD", Action = "Sell", Type = "Stock" });
         }
 
-        public DbSet<Trade> Trades { get; set; }
+        public DbSet<Holding> Holdings { get; set; }
+        // TODO : create list of holdings that make up the current image of a portfolio. Trade should only be used as a transaction history
         public DbSet<Portfolio> Portfolios { get; set; }
     }
 }

@@ -9,7 +9,7 @@ import { mergeMap } from 'rxjs/operators';
 })
 export class AuthorizeInterceptor implements HttpInterceptor {
   constructor(private authorize: AuthorizeService) { }
-
+  //Interceptor attaches the access token to outgoing HTTP requests targeting the API when the user is authenticated.
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.authorize.getAccessToken()
       .pipe(mergeMap(token => this.processRequestWithToken(token, req, next)));

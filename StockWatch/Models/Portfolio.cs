@@ -10,10 +10,11 @@ namespace StockWatch.Models
     {
         public long PortfolioId { get; set; }
         public string Title { get; set; }
-        public List<Trade> Trades { get; set; }
+        public ICollection<Holding> Holdings { get; set; }
         public decimal TotalValue { get; set; }
+        // FK = UserId
         public string UserId { get; set; }
-        [ForeignKey("UserId")]
+        //[ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
 
     }
